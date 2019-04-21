@@ -38,30 +38,67 @@ the account verification message.)`,
     nameFirst:  {
       required: true,
       type: 'string',
-      example: 'Frida Kahlo de Rivera',
-      description: 'The user\'s full name.',
+      example: 'Bob',
+      description: 'The user\'s first name.',
     },
 
     nameLast:  {
       required: true,
       type: 'string',
-      example: 'Frida Kahlo de Rivera',
-      description: 'The user\'s full name.',
+      example: 'Marley',
+      description: 'The user\'s last name.',
     },
 
     phoneMobile:  {
       required: true,
       type: 'string',
-      example: 'Frida Kahlo de Rivera',
-      description: 'The user\'s full name.',
+      example: '8005551212',
+      description: 'The user\'s mobile phone.',
     },
 
     dob:  {
       required: true,
       type: 'string',
-      example: 'Frida Kahlo de Rivera',
-      description: 'The user\'s full name.',
+      example: '2001-04-20',
+      description: 'The user\'s date of birth.',
     },
+    
+    gender:  {
+      required: true,
+      type: 'number',
+      example: 0,
+      description: 'The user\'s gender identity.',
+    },
+    
+    identificationAuthority:  {
+      required: true,
+      type: 'string',
+      example: 'California',
+      description: 'The user\'s issuer of identity.',
+    },
+    
+    identificationNumber:  {
+      required: true,
+      type: 'string',
+      example: 'X1234567',
+      description: 'The user\'s number of identity.',
+    }
+    
+    // patronExperience:  {
+    //   required: true,
+    //   type: 'number',
+    //   example: 0,
+    //   description: 'The user\'s experience of patronage.',
+    // },
+    
+    // patronRank:  {
+    //   required: true,
+    //   type: 'number',
+    //   example: 0,
+    //   description: 'The user\'s experience of patronage.',
+    // }
+    
+
     
 
   },
@@ -100,7 +137,11 @@ the account verification message.)`,
       nameFirst: inputs.nameFirst,
       nameLast: inputs.nameLast,
       birthday: inputs.dob,
+      gender: inputs.gender,
       phoneMobile: inputs.phoneMobile,
+      govIssuedIdentityAuthority: inputs.identificationAuthority,
+      govIssuedIdentityNumber: inputs.identificationNumber,
+      verification: 'false',
       tosAcceptedByIp: this.req.ip
     }, sails.config.custom.verifyEmailAddresses? {
       emailProofToken: await sails.helpers.strings.random('url-friendly'),

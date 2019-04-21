@@ -14,7 +14,7 @@
     </div>
     <div class="row">
       <div class="col-3">Name:</div>
-      <div class="col"><strong>{{me.fullName}}</strong></div>
+      <div class="col"><strong>{{me.nameFirst}} {{me.nameLast}}</strong></div>
     </div>
     <div class="row">
       <div class="col-3">Email:</div>
@@ -22,6 +22,18 @@
         <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
         <span v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'" class="badge badge-pill badge-warning">Unverified</span>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-3">Phone:</div>
+      <div class="col"><strong>{{me.phoneMobile}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Birthday:</div>
+        <div class="col"><strong>{{me.birthday}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Verified:</div>
+        <div class="col"><strong>{{me.verification}}</strong></div>
     </div>
     <hr/>
     <div class="row mb-3">

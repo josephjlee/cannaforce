@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
             <label for="phoneMobile">Mobile phone</label>
-            <input class="form-control" id="phoneMobile" type="tel"  :class="[formErrors.phoneMobile ? 'is-invalid' : '']" v-model.trim="formData.phoneMobile" autocomplete="mobile">
+            <input class="form-control" id="phoneMobile" type="tel"  :class="[formErrors.phoneMobile ? 'is-invalid' : '']" v-model.trim="formData.phoneMobile" autocomplete="mobile" placeholder="(800) 555-2420">
             <div class="invalid-feedback" v-if="formErrors.phoneMobile">Please enter a valid phone number.</div>
           </div>
         <div class="form-group">
@@ -39,6 +39,25 @@
           <label for="dob">Confirm Date Of Birth</label>
           <input class="form-control" id="dob" type="date"  :class="[formErrors.dob ? 'is-invalid' : '']" v-model.trim="formData.dob" autocomplete="bday">
           <div class="invalid-feedback" v-if="formErrors.dob">Please enter a valid Date of Birth.</div>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender selection</label>
+          <div class="form-control">
+            <input id="gender" type="radio"  :class="[formErrors.gender ? 'is-invalid' : '']" v-model.trim="formData.gender" autocomplete="sex" value="0"> Female
+            <input id="gender" type="radio"  :class="[formErrors.gender ? 'is-invalid' : '']" v-model.trim="formData.gender" autocomplete="sex" value="1"> Male
+            <input id="gender" type="radio"  :class="[formErrors.gender ? 'is-invalid' : '']" v-model.trim="formData.gender" autocomplete="sex" value="2"> Other
+          </div>
+          <div class="invalid-feedback" v-if="formErrors.gender">Please enter your gender.</div>
+        </div>
+        <div class="form-group">
+          <label for="password">Identification authority</label>
+          <input class="form-control" id="identificationAuthority" type="text"  :class="[formErrors.identificationAuthority ? 'is-invalid' : '']" v-model.trim="formData.identificationAuthority" placeholder="California">
+          <div class="invalid-feedback" v-if="formErrors.identificationAuthority">Please enter which authority issued your identification (State, Government, etc.).</div>
+        </div>
+        <div class="form-group">
+          <label for="password">Identification number</label>
+          <input class="form-control" id="identificationNumber" type="text"  :class="[formErrors.identificationNumber ? 'is-invalid' : '']" v-model.trim="formData.identificationNumber" placeholder="X4204204">
+          <div class="invalid-feedback" v-if="formErrors.identificationNumber">Please enter your identification number.</div>
         </div>
         <div class="form-group form-check">
           <input class="form-check-input" id="terms-agreement" type="checkbox" v-model="formData.agreed">

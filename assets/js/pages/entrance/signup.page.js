@@ -56,6 +56,10 @@ parasails.registerPage('signup', {
 
       var argins = this.formData;
 
+      // Get ready to ID the Users
+      var ageInput = moment().diff(argins.dob, 'years');
+      var ageLegal = (ageInput >= 18);
+
       // Validate first name:
       if(!argins.nameFirst) {
         this.formErrors.nameFirst = true;
@@ -72,8 +76,23 @@ parasails.registerPage('signup', {
       }
 
       // Validate dob:
-      if(!argins.dob) {
+      if(!argins.dob || (!ageLegal)) {
         this.formErrors.dob = true;
+      }
+      
+      // Validate gender:
+      if(!argins.gender) {
+        this.formErrors.gender = true;
+      }
+
+      // Validate identificationAuthority:
+      if(!argins.identificationAuthority) {
+        this.formErrors.identificationAuthority = true;
+      }
+
+      // Validate identificationNumber:
+      if(!argins.identificationNumber) {
+        this.formErrors.identificationNumber = true;
       }
 
       // Validate email:

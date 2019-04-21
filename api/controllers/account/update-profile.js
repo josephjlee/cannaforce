@@ -9,12 +9,61 @@ module.exports = {
 
   inputs: {
 
-    fullName: {
-      type: 'string'
+    emailAddress: {
+      required: true,
+      type: 'string',
+      isEmail: true,
+      description: 'The email address for the new account, e.g. m@example.com.',
+      extendedDescription: 'Must be a valid email address.',
     },
 
-    emailAddress: {
-      type: 'string'
+    nameFirst:  {
+      required: true,
+      type: 'string',
+      example: 'Bob',
+      description: 'The user\'s first name.',
+    },
+
+    nameLast:  {
+      required: true,
+      type: 'string',
+      example: 'Marley',
+      description: 'The user\'s last name.',
+    },
+
+    phoneMobile:  {
+      required: true,
+      type: 'string',
+      example: '8005551212',
+      description: 'The user\'s mobile phone.',
+    },
+
+    dob:  {
+      required: true,
+      type: 'string',
+      example: '2001-04-20',
+      description: 'The user\'s date of birth.',
+    },
+    
+    gender:  {
+      required: true,
+      type: 'number',
+      example: 0,
+      description: 'The user\'s gender identity.',
+    },
+    
+    identificationAuthority:  {
+      required: true,
+      type: 'string',
+      example: 'California',
+      description: 'The user\'s issuer of identity.',
+    },
+    
+    identificationNumber:  {
+      required: true,
+      type: 'string',
+      example: 'X1234567',
+      description: 'The user\'s number of identity.',
     },
 
   },
@@ -31,7 +80,6 @@ module.exports = {
 
 
   fn: async function (inputs) {
-
     var newEmailAddress = inputs.emailAddress;
     if (newEmailAddress !== undefined) {
       newEmailAddress = newEmailAddress.toLowerCase();
@@ -73,9 +121,16 @@ module.exports = {
 
 
     // Start building the values to set in the db.
-    // (We always set the fullName if provided.)
     var valuesToSet = {
-      fullName: inputs.fullName,
+      nameFirst: inputs.nameFirst,
+      nameLast: inputs.nameLast,
+      emailAddress: newEmailAddress,
+      phoneMobile: inputs.phoneMobile,
+      birthday: inputs.dob,
+      gender: inputs.gender,
+      govIssuedIdentityAuthority: inputs.identificationAuthority,
+      govIssuedIdentityNumber: inputs.identificationNumber,
+
     };
 
     switch (desiredEmailEffect) {
@@ -114,10 +169,12 @@ module.exports = {
 
       // Otherwise, do nothing re: email
     }
+    
 
     // Save to the db
     await User.updateOne({id: this.req.me.id })
     .set(valuesToSet);
+    console.log("The user " + valuesToSet.emailAddress + " modified their own profile.")
 
     // If this is an immediate change, and billing features are enabled,
     // then also update the billing email for this user's linked customer entry
@@ -148,7 +205,7 @@ module.exports = {
         subject: 'Your account has been updated',
         template: 'email-verify-new-email',
         templateData: {
-          fullName: inputs.fullName||this.req.me.fullName,
+          lastName: inputs.lastName||this.req.me.lastName,
           token: valuesToSet.emailProofToken
         }
       });

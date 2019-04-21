@@ -55,6 +55,7 @@ email status until they click the link in the confirmation email.`
       maxLength: 120,
       example: 'Mary Sue van der McHenst'
     },
+
     nameLast: {
       type: 'string',
       required: true,
@@ -62,6 +63,7 @@ email status until they click the link in the confirmation email.`
       maxLength: 120,
       example: 'Mary Sue van der McHenst'
     },
+
     phoneMobile: {
       type: 'string',
       required: true,
@@ -69,12 +71,47 @@ email status until they click the link in the confirmation email.`
       maxLength: 120,
       example: 'Mary Sue van der McHenst'
     },
+
+    gender: {
+      type: 'number',
+      required: true,
+      description: 'Full representation of the user\'s gender.',
+      example: 0
+    },
+
     birthday: {
       type: 'string',
       required: true,
       description: 'Full representation of the user\'s dob.',
       maxLength: 120,
       example: 'Mary Sue van der McHenst'
+    },
+
+    govIssuedIdentityAuthority: {
+      type: 'string',
+      required: true,
+      description: 'Full representation of the user\'s identity state.',
+      maxLength: 120,
+      example: 'CA'
+    },
+
+    govIssuedIdentityNumber: {
+      type: 'string',
+      required: true,
+      description: 'Full representation of the user\'s identity number.',
+      maxLength: 120,
+      example: 'X1234567'
+    },
+
+    verification: {
+      type: 'boolean',
+      required: true,
+      description: 'Full representation of the user\'s verification status.'
+    },
+    
+    isOperator: {
+      type: 'boolean',
+      description: 'Full representation of the user\'s verification status.'
     },
 
     isSuperAdmin: {

@@ -27,6 +27,13 @@ parasails.registerPage('edit-profile', {
     // Set the form data.
     this.formData.fullName = this.me.fullName;
     this.formData.emailAddress = this.me.emailChangeCandidate ? this.me.emailChangeCandidate : this.me.emailAddress;
+    this.formData.nameFirst = this.me.nameFirst;
+    this.formData.nameLast = this.me.nameLast;
+    this.formData.phoneMobile = this.me.phoneMobile;
+    this.formData.dob = this.me.birthday;
+    this.formData.gender = this.me.gender;
+    this.formData.identificationAuthority = this.me.govIssuedIdentityAuthority;
+    this.formData.identificationNumber = this.me.govIssuedIdentityNumber;
   },
   mounted: async function() {
     //…
@@ -51,15 +58,51 @@ parasails.registerPage('edit-profile', {
 
       var argins = this.formData;
 
-      // Validate name:
-      if(!argins.fullName) {
-        this.formErrors.fullName = true;
+      // Get ready to ID the Users
+      var ageInput = moment().diff(argins.dob, 'years');
+      var ageLegal = (ageInput >= 18);
+
+      // Validate first name:
+      if(!argins.nameFirst) {
+        this.formErrors.nameFirst = true;
+      }
+
+      // Validate last name:
+      if(!argins.nameLast) {
+        this.formErrors.nameLast = true;
       }
 
       // Validate email:
       if(!argins.emailAddress) {
         this.formErrors.emailAddress = true;
       }
+
+      // Validate phone:
+      if(!argins.phoneMobile) {
+        this.formErrors.phoneMobile = true;
+      }
+
+      // Validate dob:
+      if(!argins.dob || (!ageLegal)) {
+        this.formErrors.dob = true;
+      }
+
+      // Validate Gender:
+      if(!argins.gender) {
+        this.formErrors.gender = true;
+      }
+      
+      // Validate ID Issuer:
+      if(!argins.identificationAuthority) {
+        this.formErrors.identificationAuthority = true;
+      }
+
+      // Validate ID Number:
+      if(!argins.identificationNumber) {
+        this.formErrors.Number = true;
+      }
+
+
 
       // If there were any issues, they've already now been communicated to the user,
       // so simply return undefined.  (This signifies that the submission should be
