@@ -17,8 +17,8 @@ module.exports = function defineCustomHook(sails) {
       sails.log.info('Initializing hook... (`api/hooks/custom`)');
 
       // Check Stripe/Mailgun configuration (for billing and emails).
-      var IMPORTANT_STRIPE_CONFIG = ['stripeSecret', 'stripePublishableKey'];
-      var IMPORTANT_MAILGUN_CONFIG = ['mailgunSecret', 'mailgunDomain', 'internalEmailAddress'];
+      var IMPORTANT_STRIPE_CONFIG = ['sk_test_00XZu9DvbeqpEaOkp41Wsr9l00pXEMuGbc', 'pk_test_a89aHsucgWpy2Zi43AWVcbD900U0H1x5RZ'];
+      var IMPORTANT_MAILGUN_CONFIG = ['pubkey-3f9dc874a9fba9d77f58f18344a7d854', 'mg.cannaforce.com', 'no-reply@cannaforce.com'];
       var isMissingStripeConfig = _.difference(IMPORTANT_STRIPE_CONFIG, Object.keys(sails.config.custom)).length > 0;
       var isMissingMailgunConfig = _.difference(IMPORTANT_MAILGUN_CONFIG, Object.keys(sails.config.custom)).length > 0;
 
@@ -134,6 +134,25 @@ will be disabled and/or hidden in the UI.
                 throw new Error('Cannot attach view local `me`, because this view local already exists!  (Is it being attached somewhere else?)');
               }
               res.locals.me = undefined;
+  
+              // The `my` local is set explicitly to `undefined` here just to avoid having to
+              // do `typeof my !== 'undefined'` checks in our views/layouts/partials.
+              // > Note that, depending on the request, this may or may not be set to the
+              // > logged-in user record further below.
+              if (res.locals.my !== undefined) {
+                throw new Error('Cannot attach view local `my`, because this view local already exists!  (Is it being attached somewhere else?)');
+              }
+              res.locals.my = undefined;
+
+              // The `sc` local is set explicitly to `undefined` here just to avoid having to
+              // do `typeof sc !== 'undefined'` checks in our views/layouts/partials.
+              // > Note that, depending on the request, this may or may not be set to the
+              // > logged-in user record further below.
+              if (res.locals.sc !== undefined) {
+                throw new Error('Cannot attach view local `sc`, because this view local already exists!  (Is it being attached somewhere else?)');
+              }
+              res.locals.sc = undefined;
+              
             }//ﬁ
 
             // Next, if we're running in our actual "production" or "staging" Sails
@@ -169,6 +188,11 @@ will be disabled and/or hidden in the UI.
               id: req.session.userId
             });
 
+            // Make the Appointment table available for scheduling
+            var dayRunner = await Appointment.findOne({
+              id: req.session.userId
+            });
+
             // If the logged-in user has gone missing, log a warning,
             // wipe the user id from the requesting user agent's session,
             // and then send the "unauthorized" response.
@@ -191,6 +215,9 @@ will be disabled and/or hidden in the UI.
             }
             req.me = loggedInUser;
 
+
+
+            
             // If our "lastSeenAt" attribute for this user is at least a few seconds old, then set it
             // to the current timestamp.
             //
@@ -215,8 +242,15 @@ will be disabled and/or hidden in the UI.
             // > Note that we make sure a local named `me` doesn't already exist first.
             // > Also note that we strip off any properties that correspond with protected attributes.
             if (req.method === 'GET') {
+
+              // Introducing the me object
               if (res.locals.me !== undefined) {
                 throw new Error('Cannot attach logged-in user as the view local `me`, because this view local already exists!  (Is it being attached somewhere else?)');
+              }
+
+              // Introducing the my object
+              if (res.locals.my !== undefined) {
+                throw new Error('Cannot attach logged-in user as the view local `my`, because this view local already exists!  (Is it being attached somewhere else?)');
               }
 
               // Exclude any fields corresponding with attributes that have `protect: true`.
@@ -225,7 +259,14 @@ will be disabled and/or hidden in the UI.
                 if (User.attributes[attrName].protect) {
                   delete sanitizedUser[attrName];
                 }
-              }//∞
+              }
+              // Grab any additional fields from the Profile table except `protect: true`.
+              var sanitizedProfile = _.extend({}, loggedInUser);
+              for (let attrName in Profile.attributes) {
+                if (Profile.attributes[attrName].protect) {
+                  delete sanitizedUser[attrName];
+                }
+              }
 
               // If there is still a "password" in sanitized user data, then delete it just to be safe.
               // (But also log a warning so this isn't hopelessly confusing.)
@@ -235,6 +276,67 @@ will be disabled and/or hidden in the UI.
               }//ﬁ
 
               res.locals.me = sanitizedUser;
+
+              res.locals.my = sanitizedProfile;
+
+              res.locals.isBillingEnabled = true;
+
+              res.locals.isEmailVerificationRequired = true;
+
+              if (res.locals.me.isSuperAdmin) {
+
+                // Introducing the sa object
+                if (res.locals.sa !== undefined) {
+                  throw new Error('Cannot attach logged-in user as the view local `sa`, because this view local already exists!  (Is it being attached somewhere else?)');
+                }
+                // Grab any additional fields from the Events table except `protect: true`.
+                var sanitizedEvents = _.extend({}, loggedInUser);
+                for (let attrName in Event.attributes) {
+                  if (Event.attributes[attrName].protect) {
+                    delete sanitizedEvents[attrName];
+                  }
+                }
+
+
+                // Sanitize events
+                var sanitizedEvents = {};
+                var dateNow = new Date();
+                var durationMinutes01 = 1;
+                var durationMinutes15 = 15;
+                var durationMinutes30 = 30;
+
+
+                // Grab Some DB Statistics
+
+                sanitizedEvents['countEventsCritical'] = await Event.count({severityLevel: '5'});
+                sanitizedEvents['countEventsWarning'] = await Event.count({severityLevel: '4'});
+                sanitizedEvents['countEventsInfo'] = await Event.count({severityLevel: '0'});
+                sanitizedEvents['countEventsPastMinute'] = await Event.count({updatedAt: { '>=': dateNow.setMinutes(dateNow.getMinutes() - durationMinutes01)}});
+                sanitizedEvents['countEventsPastFifteen'] = await Event.count({updatedAt: { '>=': dateNow.setMinutes(dateNow.getMinutes() - durationMinutes15)}});
+                sanitizedEvents['countEventsPastThirty'] = await Event.count({updatedAt: { '>=': dateNow.setMinutes(dateNow.getMinutes() - durationMinutes30)}});
+                sanitizedEvents['countEventsChangelog'] = await Event.count({severityLevel: '0'});
+                sanitizedEvents['countAppointment'] = await Appointment.count();
+                sanitizedEvents['countEvent'] = await Event.count();
+                sanitizedEvents['countOrder'] = await Order.count();
+                sanitizedEvents['countProduct'] = await Product.count();
+                sanitizedEvents['countProfile'] = await Profile.count();
+                sanitizedEvents['countStaff'] = await Staff.count();
+                sanitizedEvents['countTask'] = await Task.count();
+                sanitizedEvents['countTimecard'] = await Timecard.count();
+                sanitizedEvents['countUser'] = await User.count();
+
+                // Grab Some User Statistics
+                sanitizedEvents['countAdmins'] = await Appointment.count({isSuperAdmin: 'true'});
+                sanitizedEvents['countOperators'] = await Appointment.count({isOperator: 'true'});
+                sanitizedEvents['countUsers'] = await Appointment.count({isOperator: 'false', isSuperAdmin: 'false'});
+                res.locals.sa = {};
+                res.locals.sa.stats = sanitizedEvents;
+
+
+
+
+                
+              }
 
               // Include information on the locals as to whether billing features
               // are enabled for this app, and whether email verification is required.

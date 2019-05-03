@@ -3,9 +3,9 @@ parasails.registerPage('account-overview', {
   //  ║║║║║ ║ ║╠═╣║    ╚═╗ ║ ╠═╣ ║ ║╣
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: {
-    isBillingEnabled: false,
+    isBillingEnabled: true,
 
-    hasBillingCard: false,
+    hasBillingCard: true,
 
     // Syncing/loading states for this page.
     syncingOpenCheckout: false,

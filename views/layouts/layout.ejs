@@ -55,23 +55,26 @@
           <div class="nav-item dropdown d-none d-sm-block">
             <a class="nav-link dropdown-toggle" id="header-account-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
             <div class="dropdown-menu account-menu" aria-labelledby="header-account-menu-link">
-              <a class="dropdown-item" href="/account">Settings</a>
-              <a class="dropdown-item" href="/logout">Sign out</a>
+              <a class="dropdown-item" href="/cart">View Cart</a>
+              <a class="dropdown-item" href="/user">My Profile</a>
+              <a class="dropdown-item" href="/account">My Settings</a>
+              <a class="dropdown-item" href="/help">Get Assist</a>
+              <a class="dropdown-item" href="/logout">Sign Out</a>
             </div>
           </div>
           <!-- Only in mobile nav -->
-          <a class="nav-item nav-link ml-2 mr-2 d-block d-sm-none" href="/account">Account Settings</a>
-          <a class="nav-item nav-link ml-2 mr-2 d-block d-sm-none" href="/logout">Sign out</a>
+          <a class="nav-item nav-link ml-2 mr-2 d-block d-sm-none" href="/account">My Settings</a>
+          <a class="nav-item nav-link ml-2 mr-2 d-block d-sm-none" href="/logout">Sign Out</a>
           <% } else { %>
           <!-- LOGGED-OUT NAVIGATION -->
           <a class="nav-item nav-link ml-2 ml-md-0 mr-2" href="/faq">FAQ</a>
-          <a class="nav-item nav-link ml-2 ml-md-0 mr-2" href="/login">Log in</a>
+          <a class="nav-item nav-link ml-2 ml-md-0 mr-2" href="/login">Log In</a>
           <!-- Only in desktop nav -->
           <div class="form-inline d-none ml-2 d-md-block" >
-            <a class="btn btn-outline-info" href="/signup">Sign up</a>
+            <a class="btn btn-outline-info" href="/signup">Sign Up</a>
           </div>
           <!-- Only in mobile nav -->
-          <a class="nav-item nav-link text-info ml-2 d-block d-md-none" href="/signup">Sign up</a>
+          <a class="nav-item nav-link text-info ml-2 d-block d-md-none" href="/signup">Sign Up</a>
           <% } %>
         </div>
       </header>
@@ -147,7 +150,13 @@
     <script src="/js/pages/account/account-overview.page.js"></script>
     <script src="/js/pages/account/edit-password.page.js"></script>
     <script src="/js/pages/account/edit-profile.page.js"></script>
+    <script src="/js/pages/admin/admin-overview.page.js"></script>
     <script src="/js/pages/contact.page.js"></script>
+    <script src="/js/pages/dashboard/event.page.js"></script>
+    <script src="/js/pages/dashboard/users.page.js"></script>
+    <script src="/js/pages/dashboard/view-record-user.js"></script>
+    <script src="/js/pages/dashboard/view-summary-users.js"></script>
+    <script src="/js/pages/dashboard/view-user.js"></script>
     <script src="/js/pages/dashboard/welcome.page.js"></script>
     <script src="/js/pages/entrance/confirmed-email.page.js"></script>
     <script src="/js/pages/entrance/forgot-password.page.js"></script>
@@ -158,6 +167,7 @@
     <script src="/js/pages/homepage.page.js"></script>
     <script src="/js/pages/legal/privacy.page.js"></script>
     <script src="/js/pages/legal/terms.page.js"></script>
+    <script src="/js/pages/user/user-view.page.js"></script>
     <!--SCRIPTS END-->
 
     <% /* Display an overlay if the current browser is not supported.

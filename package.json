@@ -10,9 +10,11 @@
     "@sailshq/socket.io-redis": "^5.2.0",
     "ajv": "^6.10.0",
     "moment": "^2.24.0",
+    "nodemon": "^1.18.11",
+    "npx": "^10.2.0",
     "sails": "^1.1.0",
     "sails-hook-apianalytics": "^2.0.3",
-    "sails-hook-organics": "^0.16.0",
+    "sails-hook-organics": "^1.0.0",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^1.5.5"
   },

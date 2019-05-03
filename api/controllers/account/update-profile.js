@@ -211,6 +211,16 @@ module.exports = {
       });
     }
 
+    if(valuesToSet){
+      await Event.create({
+        eventDate: Date.now(),
+        severityLevel: 0,
+        eventName: "login",
+        eventNumber: 411,
+        eventDescription: "The user " + this.req.me.emailAddress + " has successfully modified their own profile."
+      });
+    }
+
   }
 
 
