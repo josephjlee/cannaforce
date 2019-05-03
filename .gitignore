@@ -1,11 +1,9 @@
 # Cache objects
 packer_cache/
-node_modules/
 .tmp/public/
 .tmp/localDiskDb
 .idea/
 .DS_Store
-api/hooks/custom/index.js
 node_modules/
 # For built boxes
 *.box
