@@ -107,6 +107,16 @@ and exposed as \`req.me\`.)`
     // Modify the active session instance.
     // (This will be persisted when the response is sent.)
     this.req.session.userId = userRecord.id;
+    // Log the Login
+    if(userRecord){
+      await Event.create({
+        eventDate: Date.now(),
+        severityLevel: 0,
+        eventName: "login",
+        eventNumber: 110,
+        eventDescription: "The user " + userRecord.emailAddress + " has successfully logged in."
+      });
+    }
 
   }
 
