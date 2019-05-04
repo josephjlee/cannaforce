@@ -1,5 +1,5 @@
 /**
- * User.js
+ * Profile.js
  *
  * A user who can log in to this application.
  */
@@ -20,6 +20,7 @@ module.exports = {
       maxLength: 200,
       example: 'mary.sue@example.com'
     },
+
 
     prefIndicaSativa: {
       type: 'string',
@@ -43,7 +44,15 @@ module.exports = {
       description: 'Full representation of the user\'s preference for concentrates vs. flower.',
       maxLength: 120,
       example: 'X1234567'
-    }
+    },
+
+    prefVendors: {
+      type: 'string',
+      required: true,
+      description: 'Full representation of the user\'s preference for strain.',
+      maxLength: 200,
+      example: 'Moxie,710 Labs'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

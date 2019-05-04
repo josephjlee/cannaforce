@@ -320,15 +320,15 @@ will be disabled and/or hidden in the UI.
                 sanitizedEvents['countOrder'] = await Order.count();
                 sanitizedEvents['countProduct'] = await Product.count();
                 sanitizedEvents['countProfile'] = await Profile.count();
-                sanitizedEvents['countStaff'] = await Staff.count();
+                sanitizedEvents['countBudtenders'] = await Budtender.count();
                 sanitizedEvents['countTask'] = await Task.count();
                 sanitizedEvents['countTimecard'] = await Timecard.count();
                 sanitizedEvents['countUser'] = await User.count();
 
                 // Grab Some User Statistics
-                sanitizedEvents['countAdmins'] = await Appointment.count({isSuperAdmin: 'true'});
-                sanitizedEvents['countOperators'] = await Appointment.count({isOperator: 'true'});
-                sanitizedEvents['countUsers'] = await Appointment.count({isOperator: 'false', isSuperAdmin: 'false'});
+                sanitizedEvents['countAdmins'] = await Appointment.count();
+                sanitizedEvents['countOperators'] = await Appointment.count();
+                sanitizedEvents['countUsers'] = await Appointment.count();
                 res.locals.sa = {};
                 res.locals.sa.stats = sanitizedEvents;
 

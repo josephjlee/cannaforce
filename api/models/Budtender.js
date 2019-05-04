@@ -1,5 +1,5 @@
 /**
- * Timecard.js
+ * Budtender.js
  *
  * A user who can log in to this application.
  */
@@ -21,38 +21,29 @@ module.exports = {
       example: 'mary.sue@example.com'
     },
 
-    timecardDate: {
+    budtenderAccess: {
       type: 'string',
-      required: true,
-      description: 'Full representation of the timecard\'s date.',
-      maxLength: 120,
-      example: 'Mary Sue van der McHenst'
+      description: 'RBAC for Access',
+      example: 'employee,supervisor'
     },
 
-    timecardName: {
-      type: 'string',
-      required: true,
-      description: 'Short representation of the timecard\'s name.',
-      maxLength: 120,
-      example: 'Mary Sue van der McHenst'
-    },
-
-    timecardNumber: {
+    budtenderDateStart: {
       type: 'number',
-      required: true,
-      description: 'Full representation of the timecard\'s number.',
-      example: 0
+      description: 'A JS timestamp (epoch ms) representing the moment at which this user most recently interacted with the backend while logged in (or 0 if they have not interacted with the backend at all yet).',
+      example: 1502844074211
     },
 
-    timecardDescription: {
-      type: 'string',
-      required: true,
-      description: 'Full representation of the timecard\'s description.',
-      maxLength: 120,
-      example: 'Mary Sue van der McHenst'
+    budtenderDateStop: {
+      type: 'number',
+      description: 'A JS timestamp (epoch ms) representing the moment at which this user most recently interacted with the backend while logged in (or 0 if they have not interacted with the backend at all yet).',
+      example: 1502844074211
     },
 
-
+    lastSeenAt: {
+      type: 'number',
+      description: 'A JS timestamp (epoch ms) representing the moment at which this user most recently interacted with the backend while logged in (or 0 if they have not interacted with the backend at all yet).',
+      example: 1502844074211
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

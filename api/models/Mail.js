@@ -1,5 +1,5 @@
 /**
- * Event.js
+ * Mail.js
  *
  * A user who can log in to this application.
  */
@@ -13,10 +13,10 @@ module.exports = {
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
 
-    eventDate: {
+    mailDate: {
       type: 'string',
       required: true,
-      description: 'Full representation of the event\'s date.',
+      description: 'Full representation of the mail\'s date.',
       maxLength: 120,
       example: 'Mary Sue van der McHenst'
     },
@@ -24,29 +24,29 @@ module.exports = {
     severityLevel: {
       type: 'number',
       required: true,
-      description: 'Full representation of the event\'s level.',
+      description: 'Full representation of the mail\'s level.',
       example: 0
     },
 
-    eventName: {
+    mailName: {
       type: 'string',
       required: true,
-      description: 'Short representation of the event\'s name.',
+      description: 'Short representation of the mail\'s name.',
       maxLength: 120,
       example: 'Mary Sue van der McHenst'
     },
 
-    eventNumber: {
+    mailNumber: {
       type: 'number',
       required: true,
-      description: 'Full representation of the event\'s number.',
+      description: 'Full representation of the mail\'s number.',
       example: 0
     },
 
-    eventDescription: {
+    mailDescription: {
       type: 'string',
       required: true,
-      description: 'Full representation of the event\'s description.',
+      description: 'Full representation of the mail\'s description.',
       maxLength: 120,
       example: 'Mary Sue van der McHenst'
     },

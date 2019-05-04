@@ -1,5 +1,5 @@
 /**
- * Appointment.js
+ * Role.js
  *
  * A user who can log in to this application.
  */
@@ -12,45 +12,48 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    apptSerial: {
-      type: 'number',
-      unique: true,
+    roleName: {
+      type: 'string',
       required: true,
-      description: 'Appointment Serial'
+      unique: true,
+      maxLength: 200,
+      example: 'operator'
     },
 
-    appName: {
-      type: 'string',
-      isEmail: true,
-      description: 'Appointment Description Here'
-    },
-
-    apptDateStart: {
-      type: 'string',
-      description: 'Appointment Date Begin'
-    },
-
-    apptDateStop: {
-      type: 'string',
-      description: 'Appointment Date End'
-    },
-
-    apptReminder: {
+    roleAccessAdminRead: {
       type: 'boolean',
-      description: 'Appointment Reminder'
+      description: 'true or false grant access for admin'
     },
 
-    apptPriority: {
-      type: 'number',
-      description: 'Appointment Priority'
+    roleAccessAdminWrite: {
+      type: 'boolean',
+      description: 'true or false grant access for admin'
     },
 
-    apptDescription: {
-      type: 'string',
-      description: 'Appointment Description'
+    roleAccessDevRead: {
+      type: 'boolean',
+      description: 'true or false grant access for dev'
     },
 
-    apptLastUpdate: {
+    roleAccessDevWrite: {
+      type: 'boolean',
+      description: 'true or false grant access for dev'
+    },
+
+    roleAccessOpsRead: {
+      type: 'boolean',
+      description: 'true or false grant access for ops'
+    },
+
+    roleAccessOpsWrite: {
+      type: 'boolean',
+      description: 'true or false grant access for ops'
+    },
+
+
+
+
+    lastSeenAt: {
       type: 'number',
       description: 'A JS timestamp (epoch ms) representing the moment at which this user most recently interacted with the backend while logged in (or 0 if they have not interacted with the backend at all yet).',
       example: 1502844074211

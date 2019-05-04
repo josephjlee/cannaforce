@@ -1,7 +1,7 @@
 /**
- * Event.js
+ * Cart.js
  *
- * A user who can log in to this application.
+ * A cart for this application.
  */
 
 module.exports = {
@@ -12,46 +12,25 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-
-    eventDate: {
+    cartSession: {
       type: 'string',
       required: true,
-      description: 'Full representation of the event\'s date.',
-      maxLength: 120,
-      example: 'Mary Sue van der McHenst'
+      unique: true,
+      maxLength: 200,
     },
 
-    severityLevel: {
+    cartItem: {
+      type: 'string',
+      description: 'The IP (ipv4) address of the request that accepted the terms of service.',
+      extendedDescription: 'Useful for certain types of businesses and regulatory requirements (KYC, etc.)',
+      moreInfoUrl: 'https://en.wikipedia.org/wiki/Know_your_customer'
+    },
+
+    lastSeenAt: {
       type: 'number',
-      required: true,
-      description: 'Full representation of the event\'s level.',
-      example: 0
+      description: 'A JS timestamp (epoch ms) representing the moment at which this user most recently interacted with the backend while logged in (or 0 if they have not interacted with the backend at all yet).',
+      example: 1502844074211
     },
-
-    eventName: {
-      type: 'string',
-      required: true,
-      description: 'Short representation of the event\'s name.',
-      maxLength: 120,
-      example: 'Mary Sue van der McHenst'
-    },
-
-    eventNumber: {
-      type: 'number',
-      required: true,
-      description: 'Full representation of the event\'s number.',
-      example: 0
-    },
-
-    eventDescription: {
-      type: 'string',
-      required: true,
-      description: 'Full representation of the event\'s description.',
-      maxLength: 120,
-      example: 'Mary Sue van der McHenst'
-    },
-
-
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
