@@ -1,7 +1,7 @@
 # Cache objects
 packer_cache/
 .tmp/public/
-.tmp/localDiskDb
+.tmp/localDiskDb/*.db
 .idea/
 .DS_Store
 node_modules/
