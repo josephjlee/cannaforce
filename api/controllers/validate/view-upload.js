@@ -1,16 +1,16 @@
 module.exports = {
 
 
-  friendlyName: 'View identity',
+  friendlyName: 'View upload',
 
 
-  description: 'Display "Identity" page.',
+  description: 'Display "Upload" page.',
 
 
   exits: {
 
     success: {
-      viewTemplatePath: 'pages/account/verify/identity'
+      viewTemplatePath: 'pages/validate/upload'
     }
 
   },

@@ -1,0 +1,187 @@
+<div id="validate" v-cloak>
+
+  <div class="container">
+    <h1>My identity</h1>
+    <hr/>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <h4>Email identity</h4>
+      </div>
+      <div class="col-sm-6">
+        <span class="float-sm-right">
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/validate/email">Change Email</a>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">Authority:</div>
+        <div class="col">
+          <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
+          <span v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'" class="badge badge-pill badge-warning">Unverified</span>
+        </div>
+    </div>
+    <hr/>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <h4>Government identity</h4>
+      </div>
+      <div class="col-sm-6">
+        <span class="float-sm-right">
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/validate/identity">Update Identity</a>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">Type:</div>
+      <div class="col"><strong>{{me.nameFirst}} {{me.nameLast}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Authority:</div>
+      <div class="col">
+        <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
+        <span v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'" class="badge badge-pill badge-warning">Unverified</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">Serial:</div>
+      <div class="col"><strong>{{me.phoneMobile}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Expiration:</div>
+        <div class="col"><strong>{{me.birthday}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Verified:</div>
+        <div class="col"><strong>{{me.verification}}</strong></div>
+    </div>
+    <!-- Show the Medical Buttons if the user is medical type -->
+    <%if (me.isMedical) { %>        
+      <hr/>
+      <div class="row mb-3">
+        <div class="col-sm-6">
+          <h4>Medical documenation</h4>
+        </div>
+        <div class="col-sm-6">
+          <span class="float-sm-right">
+            <a class="btn btn-sm btn-outline-info account-settings-button" href="/validate/medical">Edit Medical</a>
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">Type:</div>
+        <div class="col"><strong>{{me.nameFirst}} {{me.nameLast}}</strong></div>
+      </div>
+      <div class="row">
+        <div class="col-3">Authority:</div>
+        <div class="col">
+          <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
+          <span v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'" class="badge badge-pill badge-warning">Unverified</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">Serial:</div>
+        <div class="col"><strong>{{me.phoneMobile}}</strong></div>
+      </div>
+      <div class="row">
+        <div class="col-3">Expiration:</div>
+          <div class="col"><strong>{{me.birthday}}</strong></div>
+      </div>
+      <div class="row">
+        <div class="col-3">Verified:</div>
+          <div class="col"><strong>{{me.verification}}</strong></div>
+      </div>
+    
+      <% } %>
+    <!-- Show the Vendor Buttons if the user is vendor type -->
+    <%if (me.isVendor == true) { %>
+      <hr/>
+      <div class="row mb-3">
+        <div class="col-sm-6">
+          <h4>Vendor documenation</h4>
+        </div>
+        <div class="col-sm-6">
+          <span class="float-sm-right">
+            <a class="btn btn-sm btn-outline-info account-settings-button" href="/validate/vendor">Edit Vendor</a>
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">Type:</div>
+        <div class="col"><strong>{{me.nameFirst}} {{me.nameLast}}</strong></div>
+      </div>
+      <div class="row">
+        <div class="col-3">Authority:</div>
+        <div class="col">
+          <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
+          <span v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'" class="badge badge-pill badge-warning">Unverified</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">Serial:</div>
+        <div class="col"><strong>{{me.phoneMobile}}</strong></div>
+      </div>
+      <div class="row">
+        <div class="col-3">Expiration:</div>
+          <div class="col"><strong>{{me.birthday}}</strong></div>
+      </div>
+      <div class="row">
+        <div class="col-3">Verified:</div>
+          <div class="col"><strong>{{me.verification}}</strong></div>
+      </div>
+      <% } %>
+
+    <hr/>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <h4>Password</h4>
+      </div>
+      <div class="col-sm-6">
+        <span class="float-sm-right">
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/account/password">Change password</a>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">Password:</div>
+      <div class="col"><strong>••••••••••</strong></div>
+    </div>
+    <hr/>
+    <div class="row mb-3" v-if="isBillingEnabled">
+      <div class="col-sm-6">
+        <h4>Billing</h4>
+      </div>
+      <div class="col-sm-6">
+        <span class="float-sm-right">
+          <ajax-button :syncing="syncingOpenCheckout || syncingUpdateCard" class="btn btn-sm btn-outline-info account-settings-button" @click="clickStripeCheckoutButton()">
+            <span slot="syncing-state">
+              <span v-if="syncingOpenCheckout">Connecting...</span>
+              <span v-else>Updating...</span>
+            </span>
+            <span slot="default">{{ me.hasBillingCard ? 'Change card' : 'Add card' }}</span>
+          </ajax-button>
+        </span>
+      </div>
+    </div>
+    <div v-if="isBillingEnabled && me.hasBillingCard">
+      <div class="row">
+        <div class="col-3">Credit card:</div>
+        <div class="col">{{me.billingCardBrand}} ending in <strong>{{me.billingCardLast4}}</strong> <a class="remove-button ml-2" @click="clickRemoveCardButton()">Remove</a></div>
+      </div>
+      <div class="row">
+        <div class="col-3">Expiration:</div>
+        <div class="col">{{me.billingCardExpMonth}}/{{me.billingCardExpYear}}</div>
+      </div>
+    </div>
+    <div class="alert alert-danger" v-else-if="isBillingEnabled && cloudError">
+      There was an error updating your credit card information. Please check your information and try again, or <a href="/contact">contact support</a> if the error persists.
+    </div>
+    <div class="alert alert-secondary" v-else-if="isBillingEnabled">
+      You have not linked a payment source to your account. In order to access paid features, you'll need to provide your credit card information. (Don't worry: you will only be charged when you've reached the limit of your free plan.)
+    </div>
+  </div>
+
+</div>
+
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

@@ -1,16 +1,16 @@
 module.exports = {
 
 
-  friendlyName: 'View email link',
+  friendlyName: 'View medical',
 
 
-  description: 'Display "Email link" page.',
+  description: 'Display "Medical" page.',
 
 
   exits: {
 
     success: {
-      viewTemplatePath: 'pages/account/verify/email-link'
+      viewTemplatePath: 'pages/validate/medical'
     }
 
   },

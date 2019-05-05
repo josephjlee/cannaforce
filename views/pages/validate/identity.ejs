@@ -1,6 +1,49 @@
-<div id="edit-profile" v-cloak>
+<div id="validate-identity" v-cloak>
   <div class="container">
-    <h1>Update personal info</h1>
+    <h1>My Identity</h1>
+    <hr/>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <h4>Identification Documentation</h4>
+      </div>
+      <div class="col-sm-6">
+        <span class="float-sm-right">
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/validate/upload?doctype=identity">Upload ID</a>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">Document Status:</div>
+      <div class="col"><strong>{{me.verificationEmail}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Document Type:</div>
+      <div class="col"><strong>{{me.verificationEmail}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Document Issuer:</div>
+      <div class="col"><strong>{{me.verificationEmail}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Document Number (License):</div>
+      <div class="col"><strong>{{me.verificationEmail}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">First Name:</div>
+      <div class="col"><strong>{{me.nameFirst}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Last Name:</div>
+      <div class="col"><strong>{{me.nameFirst}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">DOB:</div>
+        <div class="col"><strong>{{me.birthday}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Verified:</div>
+        <div class="col"><strong>{{me.verification}}</strong></div>
+    </div>
     <hr/>
     <ajax-form action="updateProfile" :syncing.sync="syncing" :cloud-error.sync="cloudError" @submitted="submittedForm()" :handle-parsing="handleParsingForm">
       <div class="row">
@@ -18,13 +61,7 @@
             <div class="invalid-feedback" v-if="formErrors.nameLast">Please enter your last name.</div>
           </div>
         </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="emailAddress">Email address</label>
-            <input class="form-control" id="emailAddress" name="emailAddress" type="email"  :class="[formErrors.emailAddress ? 'is-invalid' : '']" v-model.trim="formData.emailAddress" placeholder="Willbur.Kookmeyer@example.com" autocomplete="email">
-            <div class="invalid-feedback" v-if="formErrors.emailAddress">Please enter a valid email address.</div>
-          </div>
-        </div>
+
         <div class="col-sm-6">
           <div class="form-group">
             <label for="phoneMobile">Phone mobile</label>
@@ -50,13 +87,7 @@
             <div class="invalid-feedback" v-if="formErrors.gender">Please select a gender.</div>
           </div>
         </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="identificationAuthority">Identification Authority (State or Government)</label>
-            <input class="form-control" id="identificationAuthority" name="identificationAuthority" type="text"  :class="[formErrors.identificationAuthority ? 'is-invalid' : '']" v-model.trim="formData.identificationAuthority">
-            <div class="invalid-feedback" v-if="formErrors.identificationAuthority">Please enter a valid Authority.</div>
-          </div>
-        </div>
+
         <!-- <div class="col-sm-6">
           <div class="form-group">
             <label for="identificationNumber">Has Your ID Been Verified?</label>
@@ -90,10 +121,43 @@
             <ajax-button type="submit" :syncing="syncing" class="btn btn-dark">Save changes</ajax-button>
           </div>
         </div>
-
-    <hr/>
       </div>
     </ajax-form>
+
+    <hr/>
+    <div class="row mb-3" v-if="isBillingEnabled">
+      <div class="col-sm-6">
+        <h4>Billing</h4>
+      </div>
+      <div class="col-sm-6">
+        <span class="float-sm-right">
+          <ajax-button :syncing="syncingOpenCheckout || syncingUpdateCard" class="btn btn-sm btn-outline-info account-settings-button" @click="clickStripeCheckoutButton()">
+            <span slot="syncing-state">
+              <span v-if="syncingOpenCheckout">Connecting...</span>
+              <span v-else>Updating...</span>
+            </span>
+            <span slot="default">{{ me.hasBillingCard ? 'Change card' : 'Add card' }}</span>
+          </ajax-button>
+        </span>
+      </div>
+    </div>
+    <div v-if="isBillingEnabled && me.hasBillingCard">
+      <div class="row">
+        <div class="col-3">Credit card:</div>
+        <div class="col">{{me.billingCardBrand}} ending in <strong>{{me.billingCardLast4}}</strong> <a class="remove-button ml-2" @click="clickRemoveCardButton()">Remove</a></div>
+      </div>
+      <div class="row">
+        <div class="col-3">Expiration:</div>
+        <div class="col">{{me.billingCardExpMonth}}/{{me.billingCardExpYear}}</div>
+      </div>
+    </div>
+    <div class="alert alert-danger" v-else-if="isBillingEnabled && cloudError">
+      There was an error updating your credit card information. Please check your information and try again, or <a href="/contact">contact support</a> if the error persists.
+    </div>
+    <div class="alert alert-secondary" v-else-if="isBillingEnabled">
+      You have not linked a payment source to your account. In order to access paid features, you'll need to provide your credit card information. (Don't worry: you will only be charged when you've reached the limit of your free plan.)
+    </div>
   </div>
+
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

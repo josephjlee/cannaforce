@@ -1,16 +1,16 @@
 module.exports = {
 
 
-  friendlyName: 'View medical',
+  friendlyName: 'View validate',
 
 
-  description: 'Display "Medical" page.',
+  description: 'Display "Validate" page.',
 
 
   exits: {
 
     success: {
-      viewTemplatePath: 'pages/account/verify/medical'
+      viewTemplatePath: 'pages/validate'
     }
 
   },

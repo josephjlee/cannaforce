@@ -96,13 +96,20 @@ module.exports.routes = {
   'GET /account/password':   { action: 'account/view-edit-password' },
   'GET /account/profile':    { action: 'account/view-edit-profile' },
 
+  // Handle Validate
+  'GET /validate': { action: 'view-validate' },
+  'GET /validate/email':        { action: 'validate/view-email' },
+  'GET /validate/identity':          { action: 'validate/view-identity' },
+  'GET /validate/medical':          { action: 'validate/view-medical' },
+  'GET /validate/upload': { action: 'validate/view-upload' },
+  
+
   // Handle Logs
   'GET /log/':               { action: 'dashboard/view-edit-user' },
   'GET /log/changes':        { action: 'dashboard/view-edit-user' },
   'GET /log/events':          { action: 'dashboard/view-edit-user' },
   'GET /log/orders':          { action: 'dashboard/view-edit-user' },
   'GET /log/tasks':           { action: 'dashboard/view-edit-user' },
-
 
   // Handle Users
   'GET /user':   { view: 'pages/user/user-view' },

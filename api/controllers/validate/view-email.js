@@ -10,7 +10,7 @@ module.exports = {
   exits: {
 
     success: {
-      viewTemplatePath: 'pages/account/verify/email'
+      viewTemplatePath: 'pages/validate/email'
     }
 
   },
