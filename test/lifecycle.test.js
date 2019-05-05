@@ -1,3 +1,7 @@
+// Initialize Sails Object
+var sails = require('sails'),
+    sails;
+
 // Before running any tests...
 before(function(done) {
 
