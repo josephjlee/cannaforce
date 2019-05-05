@@ -1,14 +1,15 @@
 <div id="account-overview" v-cloak>
   <div class="container">
-    <h1>My account</h1>
+    <h1>Admin panel</h1>
     <hr/>
     <div class="row mb-3">
       <div class="col-sm-6">
-        <h4>Personal information</h4>
+        <h4>Administrator information</h4>
       </div>
       <div class="col-sm-6">
         <span class="float-sm-right">
           <a class="btn btn-sm btn-outline-info account-settings-button" href="/account/profile">Edit profile</a>
+          <a class="btn btn-sm btn-outline-secondary account-profile-button" href="/user">View profile</a>
         </span>
       </div>
     </div>
@@ -35,54 +36,150 @@
       <div class="col-3">Verified:</div>
         <div class="col"><strong>{{me.verification}}</strong></div>
     </div>
+    <div class="row">
+      <div class="col-3">Administrator:</div>
+        <div class="col"><strong>{{me.isSuperAdmin}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Operator:</div>
+        <div class="col"><strong>{{me.isOperator}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">First Seen:</div>
+        <div class="col"><strong>{{me.isOperator}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Last Seen:</div>
+        <div class="col"><strong>{{me.isOperator}}</strong></div>
+    </div>
     <hr/>
     <div class="row mb-3">
       <div class="col-sm-6">
-        <h4>Password</h4>
+        <h4>User activity</h4>
       </div>
       <div class="col-sm-6">
         <span class="float-sm-right">
-          <a class="btn btn-sm btn-outline-info account-settings-button" href="/account/password">Change password</a>
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/users">Manage users</a>
         </span>
       </div>
     </div>
     <div class="row">
-      <div class="col-3">Password:</div>
-      <div class="col"><strong>••••••••••</strong></div>
+      <div class="col-3">New users:</div>
+      <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Returning users:</div>
+      <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
+      </div>
+    <div class="row">
+      <div class="col-3">Unique users:</div>
+      <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Active users:</div>
+        <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Daily users:</div>
+        <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Paying users:</div>
+        <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Non-paying users:</div>
+        <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Operator users:</div>
+        <div class="col"><strong>{{sa.stats.countOperators}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-3">Total users:</div>
+        <div class="col"><strong>{{sa.stats.countUsers}}</strong></div>
     </div>
     <hr/>
-    <div class="row mb-3" v-if="isBillingEnabled">
+    <div class="row mb-3">
       <div class="col-sm-6">
-        <h4>Billing</h4>
+        <h4>Event logs</h4>
       </div>
       <div class="col-sm-6">
         <span class="float-sm-right">
-          <ajax-button :syncing="syncingOpenCheckout || syncingUpdateCard" class="btn btn-sm btn-outline-info account-settings-button" @click="clickStripeCheckoutButton()">
-            <span slot="syncing-state">
-              <span v-if="syncingOpenCheckout">Connecting...</span>
-              <span v-else>Updating...</span>
-            </span>
-            <span slot="default">{{ me.hasBillingCard ? 'Change card' : 'Add card' }}</span>
-          </ajax-button>
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/events">Event logs</a>
         </span>
       </div>
     </div>
-    <div v-if="isBillingEnabled && me.hasBillingCard">
-      <div class="row">
-        <div class="col-3">Credit card:</div>
-        <div class="col">{{me.billingCardBrand}} ending in <strong>{{me.billingCardLast4}}</strong> <a class="remove-button ml-2" @click="clickRemoveCardButton()">Remove</a></div>
+    <div class="row">
+      <div class="col-5">Events rated Critical:</div>
+      <div class="col"><strong>{{sa.stats.countEventsCritical}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-5">Events rated Warning:</div>
+      <div class="col"><strong>{{sa.stats.countEventsWarning}}</strong></div>
       </div>
-      <div class="row">
-        <div class="col-3">Expiration:</div>
-        <div class="col">{{me.billingCardExpMonth}}/{{me.billingCardExpYear}}</div>
+    <div class="row">
+      <div class="col-5">Events rated Information:</div>
+      <div class="col"><strong>{{sa.stats.countEventsInfo}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-5">Events past 1 Minute:</div>
+      <div class="col"><strong>{{sa.stats.countEventsPastMinute}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-5">Events past 15 Minutes:</div>
+      <div class="col"><strong>{{sa.stats.countEventsPastFifteen}}</strong></div>
+      </div>
+    <div class="row">
+      <div class="col-5">Events from Appointments:</div>
+      <div class="col"><strong>{{sa.stats.countAppointment}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-5">Events from Operators:</div>
+        <div class="col"><strong>{{sa.stats.countOperators}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-5">Events from Total Event Count:</div>
+        <div class="col"><strong>{{sa.stats.countEvent}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-5">Events from Tasks in Progress:</div>
+        <div class="col"><strong>{{sa.stats.countTask}}</strong></div>
+    </div>
+    <hr/>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <h4>Order history</h4>
+      </div>
+      <div class="col-sm-6">
+        <span class="float-sm-right">
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/orders">View orders</a>
+        </span>
       </div>
     </div>
-    <div class="alert alert-danger" v-else-if="isBillingEnabled && cloudError">
-      There was an error updating your credit card information. Please check your information and try again, or <a href="/contact">contact support</a> if the error persists.
+    <hr/>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <h4>Task queue</h4>
+      </div>
+      <div class="col-sm-6">
+        <span class="float-sm-right">
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/tasks">View tasks</a>
+        </span>
+      </div>
     </div>
-    <div class="alert alert-secondary" v-else-if="isBillingEnabled">
-      You have not linked a payment source to your account. In order to access paid features, you'll need to provide your credit card information. (Don't worry: you will only be charged when you've reached the limit of your free plan.)
+    <hr/>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <h4>Global settings</h4>
+      </div>
+      <div class="col-sm-6">
+        <span class="float-sm-right">
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/settings">Global settings</a>
+        </span>
+      </div>
     </div>
+    <hr/>
   </div>
 
   <% /* Confirm Remove Card Info Modal */ %>
