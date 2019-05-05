@@ -1,9 +1,17 @@
-# cannaforce
+# CannaForce
 
 a [Sails v1](https://sailsjs.com) application
 
 
-### Links
+### About Us
+
++ [Cannaforce Homepage](https://cannaforce.com/get-started)
++ [Cannaforce Facebook](https://facebook.com/cannaforce)
++ [Cannaforce GitHub](https://github.com/cannaforce)
++ [Cannaforce Slack](https://cannaforce.slack.com)
++ [Cannaforce Twitter](https://twitter.com/cannaforce)
+
+### About Sails
 
 + [Sails framework documentation](https://sailsjs.com/get-started)
 + [Version notes / upgrading](https://sailsjs.com/documentation/upgrading)
@@ -11,6 +19,37 @@ a [Sails v1](https://sailsjs.com) application
 + [Community support options](https://sailsjs.com/support)
 + [Professional / enterprise options](https://sailsjs.com/enterprise)
 
+## Setup Cannaforce
+
+To get started using CannaForce:
+
+  - Launch terminal or command prompt
+  - Clone the repository using `git clone https://github.com/cannaforce/cannaforce.git`
+  - Change directories using `cd cannaforce`
+  - Install node packages via `npm i`
+  - Launch SailsJS via `sails lift` or via `npx nodemon app.js`
+
+# Customize Cannaforce
+
+After your application is up & running, you'll want to login using the default account:
+
+  - username: `sales@cannaforce.com`
+  - password: `changeme`
+
+# Top Configurations
+
+Enable MailGun Authentication
+  - Login as an Admin user
+  - Click "Global Settings" 
+  - Under MailConfig, Enter API Key & Secret
+  - Click "Test Mail Setup"
+  - After Mail Setup succeeds, you will be allowed to enable Mail Verification
+Enable Stripe Shopping Cart
+  - Login as an Admin user
+  - Click "Global Settings" 
+  - Under StripeConfig, Enter API Key & Secret
+  - Click "Test Stripe Setup"
+  - After Strip Setup succeds, you will be allowed to enable Shopping Cart
 
 ### Version info
 

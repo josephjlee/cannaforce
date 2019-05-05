@@ -210,17 +210,34 @@ without necessarily having a billing card.`
       example: 1502844074211
     },
 
-    //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
-    //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
-    //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-    // n/a
 
-    //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
-    //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
-    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    // n/a
 
   },
 
+    // Find admins 
+    findAdmins: async function (opts) {
+      var admins = await User.findOne({ isSuperAdmin: false });
 
+      if (!admins) {
+          throw require('flaverr')({
+        message: `Cannot find admins with the same name as the person w/ id=${opts.id} because one record with isAdmin does not exist.`,
+        code: 'E_UNKNOWN_PERSON'
+      });
+      }
+
+      return admins;
+    },
+    // Find users 
+    findUsers: async function (opts) {
+      var users = await User.findOne({ isSuperAdmin: false });
+
+      if (!users) {
+          throw require('flaverr')({
+        message: `Cannot find users with the same name as the person w/ id=${opts.id} because one record with isAdmin does not exist.`,
+        code: 'E_UNKNOWN_PERSON'
+      });
+      }
+
+      return users;
+    }
 };
