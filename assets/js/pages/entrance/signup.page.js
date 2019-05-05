@@ -79,10 +79,15 @@ parasails.registerPage('signup', {
       if(!argins.dob || (!ageLegal)) {
         this.formErrors.dob = true;
       }
-      
+     
       // Validate gender:
       if(!argins.gender) {
         this.formErrors.gender = true;
+      }
+      
+      // Validate type:
+      if(!argins.userType) {
+        this.formErrors.userType = true;
       }
 
       // Validate identificationAuthority:

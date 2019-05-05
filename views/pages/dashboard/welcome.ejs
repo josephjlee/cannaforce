@@ -1,8 +1,32 @@
 <div id="welcome">
   <div class="container">
-    <h1>Welcome!</h1>
+    <h1>Welcome {{me.nameFirst}} {{me.nameLast}}</h1>
     <hr/>
-    <p>This is a page that only logged-in people can visit. Don't you feel special? Try clicking on a button below to do some things you can't do when you're logged out.</p>
+    <p>Thanks for coming out.</p>
+
+
+      <!-- Show the Verification Buttons if the user is missing details -->
+      <%if (me.verification == false) { %>
+        <div class="buttons">
+          <a class="btn btn-info" href="/acccount/profile">Update My Profile</a>
+  
+        <%if (me.verificationEmail == false) { %>
+            <a class="btn btn-outline-info" href="/account/verify/email">Verify My Email</a>
+    
+        <% } %>
+        <%if (me.verificationIdentity == false) { %>
+            <a class="btn btn-info" href="/account/verify/identity">Verify My Identification</a>
+    
+        <% } %>
+        <%if (me.verificationMedical == false) { %>
+            <a class="btn btn-outline-info" href="/verify/medical">Verify My Medical</a>
+    
+        <% } %>
+
+      <% } %>
+  </div>
+  <br>
+
     <div class="buttons">
       <a class="btn btn-info" href="/user">View My Profile</a>
       <a class="btn btn-info" href="/products">View Our Products</a>

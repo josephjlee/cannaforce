@@ -70,6 +70,13 @@ the account verification message.)`,
       description: 'The user\'s gender identity.',
     },
     
+    userType: {
+      required: true,
+      type: "number",
+      description: 'the kind of user medical, etc.'
+    },
+    
+    
     identificationAuthority:  {
       required: true,
       type: 'string',
@@ -83,23 +90,6 @@ the account verification message.)`,
       example: 'X1234567',
       description: 'The user\'s number of identity.',
     }
-    
-    // patronExperience:  {
-    //   required: true,
-    //   type: 'number',
-    //   example: 0,
-    //   description: 'The user\'s experience of patronage.',
-    // },
-    
-    // patronRank:  {
-    //   required: true,
-    //   type: 'number',
-    //   example: 0,
-    //   description: 'The user\'s experience of patronage.',
-    // }
-    
-
-    
 
   },
 
@@ -131,19 +121,29 @@ the account verification message.)`,
 
     // Build up data for the new user record and save it to the database.
     // (Also use `fetch` to retrieve the new ID so that we can use it below.)
+    sails.log.info('Ready to Add' + newEmailAddress);
     var newUserRecord = await User.create(_.extend({
       emailAddress: newEmailAddress,
       password: await sails.helpers.passwords.hashPassword(inputs.password),
       nameFirst: inputs.nameFirst,
       nameLast: inputs.nameLast,
+      phoneMobile: inputs.phoneMobile,
+      gender: inputs.gender,
       birthday: inputs.dob,
       gender: inputs.gender,
-      phoneMobile: inputs.phoneMobile,
       govIssuedIdentityAuthority: inputs.identificationAuthority,
       govIssuedIdentityNumber: inputs.identificationNumber,
       verification: 'false',
+      verificationEmail: 'false',
+      verificationIdentity: 'false',
+      verificationMedical: 'false',
+      isType: inputs.userType,
+      isMedical: 'false',
+      isVendor: 'false',
       tosAcceptedByIp: this.req.ip
-    }, sails.config.custom.verifyEmailAddresses? {
+    },
+    sails.log.info('After Record Creation'),
+    sails.config.custom.verifyEmailAddresses? {
       emailProofToken: await sails.helpers.strings.random('url-friendly'),
       emailProofTokenExpiresAt: Date.now() + sails.config.custom.emailProofTokenTTL,
       emailStatus: 'unconfirmed'

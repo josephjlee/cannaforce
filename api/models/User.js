@@ -28,7 +28,7 @@ module.exports = {
       description: 'The confirmation status of the user\'s email address.',
       extendedDescription:
 `Users might be created as "unconfirmed" (e.g. normal signup) or as "confirmed" (e.g. hard-coded
-admin users).  When the email verification feature is enabled, new users created via the
+admin users).  When the email ication feature is enabled, new users created via the
 signup form have \`emailStatus: 'unconfirmed'\` until they click the link in the confirmation email.
 Similarly, when an existing user changes their email address, they switch to the "change-requested"
 email status until they click the link in the confirmation email.`
@@ -109,6 +109,29 @@ email status until they click the link in the confirmation email.`
       description: 'Full representation of the user\'s verification status.'
     },
 
+    verificationEmail: {
+      type: 'boolean',
+      required: true,
+      description: 'E representation of the user\'s email status.'
+    },
+
+    verificationIdentity: {
+      type: 'boolean',
+      required: true,
+      description: 'Full representation of the user\'s identity status.'
+    },
+
+    verificationMedical: {
+      type: 'boolean',
+      required: true,
+      description: 'Full representation of the user\'s medical status.'
+    },
+
+    isType: {
+      type: 'number',
+      description: 'Full representation of the user\'s type status.'
+    },
+
     isMedical: {
       type: 'boolean',
       description: 'Full representation of the user\'s medical status.'
@@ -116,7 +139,7 @@ email status until they click the link in the confirmation email.`
 
     isOperator: {
       type: 'boolean',
-      description: 'Full representation of the user\'s verification status.'
+      description: 'Whether this user is a "operator" with extra permissions, etc.'
     },
 
     isSuperAdmin: {
@@ -131,7 +154,7 @@ email status until they click the link in the confirmation email.`
 
     passwordResetToken: {
       type: 'string',
-      description: 'A unique token used to verify the user\'s identity when recovering a password.  Expires after 1 use, or after a set amount of time has elapsed.'
+      description: 'A unique token used to y the user\'s identity when recovering a password.  Expires after 1 use, or after a set amount of time has elapsed.'
     },
 
     passwordResetTokenExpiresAt: {
@@ -142,7 +165,7 @@ email status until they click the link in the confirmation email.`
 
     emailProofToken: {
       type: 'string',
-      description: 'A pseudorandom, probabilistically-unique token for use in our account verification emails.'
+      description: 'A pseudorandom, probabilistically-unique token for use in our account ication emails.'
     },
 
     emailProofTokenExpiresAt: {
