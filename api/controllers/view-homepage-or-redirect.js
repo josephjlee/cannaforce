@@ -37,12 +37,12 @@ module.exports = {
 
   fn: async function () {
     // Logged in users get welcome page
-    if (this.req.me && (this.req.me.isSuperAdmin == false)) {
+    if (this.req.me && (this.req.me.isSuperAdmin == false && this.req.me.isOperator == false)) {
       throw {redirectUsers:'/welcome'};
     }
 
     // Logged in operators get welcome page
-    if (this.req.me && !(this.req.me.isOperator || this.req.me.isSuperAdmin)) {
+    if (this.req.me && (this.req.me.isOperator == true)) {
       throw {redirectOperators:'/operator'};
     }
 

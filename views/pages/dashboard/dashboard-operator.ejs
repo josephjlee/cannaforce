@@ -1,0 +1,215 @@
+<div id="dashboard-operator" v-cloak>
+
+  <router-view></router-view>
+<div class="container">
+  <h1>Operator panel</h1>
+  <hr/>
+  <div class="row mb-3">
+      <div class="col-sm-6">
+        <h4>Operator designation</h4>
+        <div class="buttons">
+            <a class="btn btn-info" href="/reception">Reception</a>
+            <a class="btn btn-info" href="/store">Store</a>
+            <a class="btn btn-info" href="/tasks">Tasks</a>
+          </div>
+      </div>
+      <div class="col-sm-6">
+        <span class="float-sm-right">
+          <a class="btn btn-sm btn-outline-secondary account-settings-button" href="/logout">Logout</a>
+        </span>
+      </div>
+    </div>
+
+  <hr/>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <h4>Operator information</h4>
+    </div>
+    <div class="col-sm-6">
+      <span class="float-sm-right">
+        <a class="btn btn-sm btn-outline-info account-settings-button" href="/validate/checkin">Operator CheckIn</a>
+        <a class="btn btn-sm btn-outline-secondary account-profile-button" href="/validate/checkout">Operator CheckOut</a>
+        <a class="btn btn-sm btn-outline-info account-settings-button" href="/validate/search">Operator Search</a>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">My Current Login:</div>
+    <div class="col"><strong>{{me.nameFirst}} {{me.nameLast}}</strong></div>
+    <div class="col-3">My Last Action:</div>
+    <div class="col">
+      <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
+      <span v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'" class="badge badge-pill badge-warning">Unverified</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">My First Login:</div>
+    <div class="col"><strong>{{me.phoneMobile}}</strong></div>
+    <div class="col-3">My Last :</div>
+      <div class="col"><strong>{{me.birthday}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Verified:</div>
+      <div class="col"><strong>{{me.verification}}</strong></div>
+    <div class="col-3">Administrator:</div>
+      <div class="col"><strong>{{me.isSuperAdmin}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Operator:</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+    <div class="col-3">First Seen:</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+  </div>
+  <hr/>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <h4>Site information</h4>
+    </div>
+    <div class="col-sm-6">
+      <span class="float-sm-right">
+        <a class="btn btn-sm btn-outline-secondary account-settings-button" href="/dashboard/site">Site Info</a>
+        <a class="btn btn-sm btn-outline-info account-profile-button" href="/dashboard/store">Store Info</a>
+        <a class="btn btn-sm btn-outline-secondary account-settings-button" href="/dashboard/system">System Info</a>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">Name:</div>
+    <div class="col"><strong>{{me.nameFirst}} {{me.nameLast}}</strong></div>
+    <div class="col-3">Email:</div>
+    <div class="col">
+      <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
+      <span v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'" class="badge badge-pill badge-warning">Unverified</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">Phone:</div>
+    <div class="col"><strong>{{me.phoneMobile}}</strong></div>
+    <div class="col-3">Birthday:</div>
+      <div class="col"><strong>{{me.birthday}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Verified:</div>
+      <div class="col"><strong>{{me.verification}}</strong></div>
+    <div class="col-3">Administrator:</div>
+      <div class="col"><strong>{{me.isSuperAdmin}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Operator:</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+    <div class="col-3">First Seen:</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+  </div>
+  <hr/>
+
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <h4>Task information</h4>
+    </div>
+    <div class="col-sm-6">
+      <span class="float-sm-right">
+        <a class="btn btn-sm btn-outline-secondary account-settings-button" href="/task/search">Task Search</a>
+        <a class="btn btn-sm btn-outline-info account-profile-button" href="/task/create">Task Create</a>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">Current Task:</div>
+    <div class="col"><strong>{{me.nameFirst}} {{me.nameLast}}</strong></div>
+    <div class="col-3">Next Task:</div>
+    <div class="col">
+      <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
+      <span v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'" class="badge badge-pill badge-warning">Unverified</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">Tasks Today:</div>
+    <div class="col"><strong>{{me.phoneMobile}}</strong></div>
+    <div class="col-3">Tasks Tomorrow:</div>
+      <div class="col"><strong>{{me.birthday}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Priority Total:</div>
+      <div class="col"><strong>{{me.verification}}</strong></div>
+    <div class="col-3">Group Total:</div>
+      <div class="col"><strong>{{me.isSuperAdmin}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">My Outstanding:</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+    <div class="col-3">My Completed:</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+  </div>
+  <hr/>
+
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <h4>Log information</h4>
+    </div>
+    <div class="col-sm-6">
+      <span class="float-sm-right">
+        <a class="btn btn-sm btn-outline-secondary account-profile-button" href="/log">Log View</a>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">Critical (Last 24):</div>
+    <div class="col"><strong>{{me.nameFirst}} {{me.nameLast}}</strong></div>
+    <div class="col-3">Critical (Total):</div>
+    <div class="col">
+      <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
+      <span v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'" class="badge badge-pill badge-warning">Unverified</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">Warning (Last 24):</div>
+    <div class="col"><strong>{{me.phoneMobile}}</strong></div>
+    <div class="col-3">Warning (Total):</div>
+      <div class="col"><strong>{{me.birthday}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Info (Last 24):</div>
+      <div class="col"><strong>{{me.verification}}</strong></div>
+    <div class="col-3">Info (Total):</div>
+      <div class="col"><strong>{{me.isSuperAdmin}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Total (Last 5 minutes):</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+    <div class="col-3">First (Last 10 minutes):</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Total (Last 1 hour):</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+    <div class="col-3">First (Last 3 hours):</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Total (Last 1 day):</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+    <div class="col-3">First (Last 3 days):</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Total (Last 1 week):</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+    <div class="col-3">First (Last 3 weeks):</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">DB Count (total):</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+    <div class="col-3">DB Size (in MB):</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+  </div>
+  <hr/>
+
+  
+  </div>
+  <hr/>
+</div>
+
+
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

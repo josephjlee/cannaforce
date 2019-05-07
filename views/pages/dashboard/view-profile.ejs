@@ -1,0 +1,30 @@
+<div id="dashboard-profile" v-cloak>
+
+    <router-view></router-view>
+    <div class="container">
+      <h1>User panel</h1>
+      <hr/>
+      <div class="row mb-3">
+          <div class="col-sm-6">
+            <h4>User identity</h4>
+            <div class="buttons">
+                <a class="btn btn-info" href="/account">View My Account</a>
+                <a class="btn btn-info" href="/products">View Our Products</a>
+                <a class="btn btn-info" href="/account/profile">Edit My Account</a>
+                <br>
+                <br>
+                <a class="btn btn-info" href="/dashboard/profile">My Account Dashboard</a>
+                <a class="btn btn-info" href="/validate/upload">Validation Upload</a>
+                <a class="btn btn-info" href="/validate/profile">Validation Profile</a>
+              </div>
+          </div>
+          <div class="col-sm-6">
+            <span class="float-sm-right">
+              <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/users">Manage users</a>
+            </span>
+          </div>
+        </div>
+  </div>
+      <hr/>
+</div>
+<%- /* Expose server-rendered data as window.SAILS_LOCALS :: */ exposeLocalsToBrowser() %>

@@ -183,6 +183,22 @@ email status until they click the link in the confirmation email.`
 It just means they have a customer entry in Stripe, which might or might not have a billing card.`
     },
 
+    isBillingEnabled: {
+      type: 'boolean',
+      description: 'Whether this user has a default billing enabled.',
+      extendedDescription:
+`More specifically, this indcates whether this user record's linked customer entry in Stripe has
+a default payment source (i.e. credit card).  Note that a user have a \`stripeCustomerId\`
+without necessarily having a billing card.`
+    },
+
+    isEmailVerificationRequired: {
+      type: 'boolean',
+      description: 'Does the email need to be verified?',
+      extendedDescription:
+`More specifically, has this email been updated & has the email confirmation link been clicked?`
+    },
+
     hasBillingCard: {
       type: 'boolean',
       description: 'Whether this user has a default billing card hooked up as their payment method.',

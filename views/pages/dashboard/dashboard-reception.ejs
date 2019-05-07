@@ -1,0 +1,138 @@
+<div id="dsahbaord-reception" v-cloak>
+
+  <router-view></router-view>
+<div class="container">
+  <h1>Reception panel</h1>
+  <hr/>
+  <div class="row mb-3">
+      <div class="col-sm-6">
+        <h4>User CheckIn & CheckOut</h4>
+        <div class="buttons">
+          <a class="btn btn-info" href="/dashboard/create">Create User</a>
+          <a class="btn btn-info" href="/dashboard/search">Search User</a>
+          <a class="btn btn-info" href="/dashboard/update">Update User</a>
+          <a class="btn btn-info" href="/dashbaord/delete">Delete User</a>
+          </div>
+      </div>
+      <div class="col-sm-6">
+        <span class="float-sm-right">
+          <a class="btn btn-sm btn-outline-secondary account-settings-button" href="/validate/CheckOut">CheckOut User</a>
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/validate/checkin">CheckIn User</a>
+        </span>
+      </div>
+    </div>
+
+  <hr/>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <h4>User information</h4>
+    </div>
+    <div class="col-sm-6">
+      <span class="float-sm-right">
+        <a class="btn btn-sm btn-outline-info account-settings-button" href="/account/profile">Edit profile</a>
+        <a class="btn btn-sm btn-outline-secondary account-profile-button" href="/user">View profile</a>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">Name:</div>
+    <div class="col"><strong>{{me.nameFirst}} {{me.nameLast}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Email:</div>
+    <div class="col">
+      <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
+      <span v-if="me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested'" class="badge badge-pill badge-warning">Unverified</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">Phone:</div>
+    <div class="col"><strong>{{me.phoneMobile}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Birthday:</div>
+      <div class="col"><strong>{{me.birthday}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Verified:</div>
+      <div class="col"><strong>{{me.verification}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Administrator:</div>
+      <div class="col"><strong>{{me.isSuperAdmin}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Operator:</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">First Seen:</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+  </div>
+  <div class="row">
+    <div class="col-3">Last Seen:</div>
+      <div class="col"><strong>{{me.isOperator}}</strong></div>
+  </div>
+  <hr/>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <h4>User activity</h4>
+    </div>
+    <div class="col-sm-6">
+      <span class="float-sm-right">
+        <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/users">Manage users</a>
+      </span>
+    </div>
+  </div>
+
+  <hr/>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <h4>Event logs</h4>
+    </div>
+    <div class="col-sm-6">
+      <span class="float-sm-right">
+        <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/events">Event logs</a>
+      </span>
+    </div>
+  </div>
+
+  <hr/>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <h4>Order history</h4>
+    </div>
+    <div class="col-sm-6">
+      <span class="float-sm-right">
+        <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/orders">View orders</a>
+      </span>
+    </div>
+  </div>
+  <hr/>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <h4>Task queue</h4>
+    </div>
+    <div class="col-sm-6">
+      <span class="float-sm-right">
+        <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/tasks">View tasks</a>
+      </span>
+    </div>
+  </div>
+  <hr/>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <h4>Global settings</h4>
+    </div>
+    <div class="col-sm-6">
+      <span class="float-sm-right">
+        <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/settings">Global settings</a>
+      </span>
+    </div>
+  </div>
+  <hr/>
+</div>
+
+
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

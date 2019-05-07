@@ -1,7 +1,7 @@
 /**
- * is-super-operator
+ * is-operator
  *
- * A simple policy that blocks requests from non-super-operators.
+ * A simple policy that blocks requests from non-operators.
  *
  * For more about how to use policies, see:
  *   https://sailsjs.com/config/policies

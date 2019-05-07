@@ -1,10 +1,10 @@
 <div id="account-overview" v-cloak>
   <div class="container">
-    <h1>Admin panel</h1>
+    <h1>Account panel</h1>
     <hr/>
     <div class="row mb-3">
       <div class="col-sm-6">
-        <h4>Administrator information</h4>
+        <h4>Account information</h4>
       </div>
       <div class="col-sm-6">
         <span class="float-sm-right">
@@ -55,152 +55,18 @@
     <hr/>
     <div class="row mb-3">
       <div class="col-sm-6">
-        <h4>User activity</h4>
+        <h4>Account activity</h4>
       </div>
       <div class="col-sm-6">
         <span class="float-sm-right">
-          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/users">Manage users</a>
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/users">View activity</a>
         </span>
       </div>
     </div>
-    <div class="row">
-      <div class="col-3">New users:</div>
-      <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-3">Returning users:</div>
-      <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
-      </div>
-    <div class="row">
-      <div class="col-3">Unique users:</div>
-      <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-3">Active users:</div>
-        <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-3">Daily users:</div>
-        <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-3">Paying users:</div>
-        <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-3">Non-paying users:</div>
-        <div class="col"><strong>{{sa.stats.countUser}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-3">Operator users:</div>
-        <div class="col"><strong>{{sa.stats.countOperators}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-3">Total users:</div>
-        <div class="col"><strong>{{sa.stats.countUsers}}</strong></div>
-    </div>
+
     <hr/>
-    <div class="row mb-3">
-      <div class="col-sm-6">
-        <h4>Event logs</h4>
-      </div>
-      <div class="col-sm-6">
-        <span class="float-sm-right">
-          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/events">Event logs</a>
-        </span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-5">Events rated Critical:</div>
-      <div class="col"><strong>{{sa.stats.countEventsCritical}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-5">Events rated Warning:</div>
-      <div class="col"><strong>{{sa.stats.countEventsWarning}}</strong></div>
-      </div>
-    <div class="row">
-      <div class="col-5">Events rated Information:</div>
-      <div class="col"><strong>{{sa.stats.countEventsInfo}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-5">Events past 1 Minute:</div>
-      <div class="col"><strong>{{sa.stats.countEventsPastMinute}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-5">Events past 15 Minutes:</div>
-      <div class="col"><strong>{{sa.stats.countEventsPastFifteen}}</strong></div>
-      </div>
-    <div class="row">
-      <div class="col-5">Events from Appointments:</div>
-      <div class="col"><strong>{{sa.stats.countAppointment}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-5">Events from Operators:</div>
-        <div class="col"><strong>{{sa.stats.countOperators}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-5">Events from Total Event Count:</div>
-        <div class="col"><strong>{{sa.stats.countEvent}}</strong></div>
-    </div>
-    <div class="row">
-      <div class="col-5">Events from Tasks in Progress:</div>
-        <div class="col"><strong>{{sa.stats.countTask}}</strong></div>
-    </div>
-    <hr/>
-    <div class="row mb-3">
-      <div class="col-sm-6">
-        <h4>Order history</h4>
-      </div>
-      <div class="col-sm-6">
-        <span class="float-sm-right">
-          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/orders">View orders</a>
-        </span>
-      </div>
-    </div>
-    <hr/>
-    <div class="row mb-3">
-      <div class="col-sm-6">
-        <h4>Task queue</h4>
-      </div>
-      <div class="col-sm-6">
-        <span class="float-sm-right">
-          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/tasks">View tasks</a>
-        </span>
-      </div>
-    </div>
-    <hr/>
-    <div class="row mb-3">
-      <div class="col-sm-6">
-        <h4>Global settings</h4>
-      </div>
-      <div class="col-sm-6">
-        <span class="float-sm-right">
-          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/settings">Global settings</a>
-        </span>
-      </div>
-    </div>
-    <hr/>
+
   </div>
 
-  <% /* Confirm Remove Card Info Modal */ %>
-  <modal v-if="removeCardModalVisible" @close="closeRemoveCardModal()" v-cloak>
-    <div class="modal-header">
-      <h5 class="modal-title">Remove Card Info?</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span>&times;</span>
-      </button>
-    </div>
-    <ajax-form action="updateBillingCard" :syncing.sync="syncingRemoveCard" :cloud-error.sync="cloudError" :handle-parsing="handleParsingRemoveCardForm" @submitted="submittedRemoveCardForm()">
-      <div class="modal-body">
-        <p>Are you sure you want to remove your {{me.billingCardBrand}} ending in <strong>{{me.billingCardLast4}}</strong>?</p>
-        <p class="text-muted">This may restrict your access to paid features.</p>
-        <p class="text-danger" v-if="cloudError"><small>An error occured while processing your request. Please check your information and try again, or <a href="/contact">contact support</a> if the error persists.</small></p>
-      </div>
-      <div class="modal-footer">
-        <button data-dismiss="modal" class="btn btn-outline-secondary mr-1">Nevermind</button>
-        <ajax-button type="submit" :syncing="syncingRemoveCard" class="btn btn-danger ml-1">Remove</ajax-button>
-      </div>
-    </ajax-form>
-  </modal>
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

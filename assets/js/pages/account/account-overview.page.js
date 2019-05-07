@@ -1,48 +1,38 @@
-parasails.registerPage('account-overview', {
+parasails.registerPage('account', {
   //  ╦╔╗╔╦╔╦╗╦╔═╗╦    ╔═╗╔╦╗╔═╗╔╦╗╔═╗
   //  ║║║║║ ║ ║╠═╣║    ╚═╗ ║ ╠═╣ ║ ║╣
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: {
-    isBillingEnabled: true,
-
-    hasBillingCard: true,
-
-    // Syncing/loading states for this page.
-    syncingOpenCheckout: false,
-    syncingUpdateCard: false,
-    syncingRemoveCard: false,
-
-    // Form data
-    formData: { /* … */ },
-
-    // Server error state for the form
-    cloudError: '',
-
-    // For the Stripe checkout window
-    checkoutHandler: undefined,
-
-    // For the confirmation modal:
-    removeCardModalVisible: false,
+    modal: '',
+    pageLoadedAt: Date.now()
   },
 
   //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗
   //  ║  ║╠╣ ║╣ ║  ╚╦╝║  ║  ║╣
   //  ╩═╝╩╚  ╚═╝╚═╝ ╩ ╚═╝╩═╝╚═╝
-  beforeMount: function (){
-    _.extend(this, window.SAILS_LOCALS);
-
-    this.isBillingEnabled = !!this.stripePublishableKey;
-
-    // Determine whether there is billing info for this user.
-    this.me.hasBillingCard = (
-      this.me.billingCardBrand &&
-      this.me.billingCardLast4 &&
-      this.me.billingCardExpMonth &&
-      this.me.billingCardExpYear
-    );
+  beforeMount: function() {
+    // Attach any initial data from the server.
+    _.extend(this, SAILS_LOCALS);
   },
   mounted: async function() {
     //…
+  },
+
+  //  ╦  ╦╦╦═╗╔╦╗╦ ╦╔═╗╦    ╔═╗╔═╗╔═╗╔═╗╔═╗
+  //  ╚╗╔╝║╠╦╝ ║ ║ ║╠═╣║    ╠═╝╠═╣║ ╦║╣ ╚═╗
+  //   ╚╝ ╩╩╚═ ╩ ╚═╝╩ ╩╩═╝  ╩  ╩ ╩╚═╝╚═╝╚═╝
+  // Configure deep-linking (aka client-side routing)
+  virtualPagesRegExp: /^\/account\/?([^\/]+)?\/?/,
+  afterNavigate: async function(virtualPageSlug){
+    // `virtualPageSlug` is determined by the regular expression above, which
+    // corresponds with `:unused?` in the server-side route for this page.
+    switch (virtualPageSlug) {
+      case 'hello':
+        this.modal = 'example';
+        break;
+      default:
+        this.modal = '';
+    }
   },
 
   //  ╦╔╗╔╔╦╗╔═╗╦═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
@@ -50,71 +40,20 @@ parasails.registerPage('account-overview', {
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
 
-    clickStripeCheckoutButton: async function() {
-
-      // Prevent double-posting if it's still loading.
-      if(this.syncingUpdateCard) { return; }
-
-      // Show syncing state for opening checkout.
-      this.syncingOpenCheckout = true;
-
-      // Clear out error states.
-      this.cloudError = false;
-
-      // Open Stripe Checkout.
-      var billingCardInfo = await parasails.util.openStripeCheckout(this.stripePublishableKey, this.me.emailAddress);
-      // Clear the loading state for opening checkout.
-      this.syncingOpenCheckout = false;
-      if (!billingCardInfo) {
-        // (if the user canceled the dialog, avast)
-        return;
-      }
-
-      // Now that payment info has been successfully added, update the billing
-      // info for this user in our backend.
-      this.syncingUpdateCard = true;
-      await Cloud.updateBillingCard.with(billingCardInfo)
-      .tolerate(()=>{
-        this.cloudError = true;
-      });
-      this.syncingUpdateCard = false;
-
-      // Upon success, update billing info in the UI.
-      if (!this.cloudError) {
-        Object.assign(this.me, _.pick(billingCardInfo, ['billingCardLast4', 'billingCardBrand', 'billingCardExpMonth', 'billingCardExpYear']));
-        this.me.hasBillingCard = true;
-      }
+    clickOpenExampleModalButton: async function() {
+      this.goto('/account/profile');
+      // Or, without deep links, instead do:
+      // ```
+      // this.modal = 'example';
+      // ```
     },
 
-    clickRemoveCardButton: async function() {
-      this.removeCardModalVisible = true;
-    },
-
-    closeRemoveCardModal: async function() {
-      this.removeCardModalVisible = false;
-      this.cloudError = false;
-    },
-
-    submittedRemoveCardForm: async function() {
-
-      // Update billing info on success.
-      this.me.billingCardLast4 = undefined;
-      this.me.billingCardBrand = undefined;
-      this.me.billingCardExpMonth = undefined;
-      this.me.billingCardExpYear = undefined;
-      this.me.hasBillingCard = false;
-
-      // Close the modal and clear it out.
-      this.closeRemoveCardModal();
-
-    },
-
-    handleParsingRemoveCardForm: function() {
-      return {
-        // Set to empty string to indicate the default payment source
-        // for this customer is being completely removed.
-        stripeToken: ''
-      };
+    closeExampleModal: async function() {
+      this.goto('/account');
+      // Or, without deep links, instead do:
+      // ```
+      // this.modal = '';
+      // ```
     },
 
   }

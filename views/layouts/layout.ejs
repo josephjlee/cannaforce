@@ -56,7 +56,7 @@
             <a class="nav-link dropdown-toggle" id="header-account-menu-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
             <div class="dropdown-menu account-menu" aria-labelledby="header-account-menu-link">
               <a class="dropdown-item" href="/cart">View Cart</a>
-              <a class="dropdown-item" href="/user">My Profile</a>
+              <a class="dropdown-item" href="/account/profile?userId=<%= me.id %>">My Profile</a>
               <a class="dropdown-item" href="/account">My Settings</a>
               <a class="dropdown-item" href="/help">Get Assist</a>
               <a class="dropdown-item" href="/logout">Sign Out</a>
@@ -147,24 +147,32 @@
     <script src="/js/components/modal.component.js"></script>
     <script src="/js/utilities/open-stripe-checkout.js"></script>
     <script src="/js/pages/498.page.js"></script>
+    <script src="/js/pages/account/account-overview.page copy.js"></script>
     <script src="/js/pages/account/account-overview.page.js"></script>
+    <script src="/js/pages/account/account-profile.page.js"></script>
     <script src="/js/pages/account/edit-password.page.js"></script>
     <script src="/js/pages/account/edit-profile.page.js"></script>
-    <script src="/js/pages/account/verify.page.js"></script>
-    <script src="/js/pages/account/verify/email-link.page.js"></script>
-    <script src="/js/pages/account/verify/email.page.js"></script>
-    <script src="/js/pages/account/verify/identity-upload.page.js"></script>
-    <script src="/js/pages/account/verify/identity.page.js"></script>
-    <script src="/js/pages/account/verify/medical-upload.page.js"></script>
-    <script src="/js/pages/account/verify/medical.page.js"></script>
     <script src="/js/pages/admin/admin-overview.page.js"></script>
     <script src="/js/pages/contact.page.js"></script>
-    <script src="/js/pages/dashboard/event.page.js"></script>
-    <script src="/js/pages/dashboard/users.page.js"></script>
+    <script src="/js/pages/dashboard.page.js"></script>
+    <script src="/js/pages/dashboard/dashbaord-user.page.js"></script>
+    <script src="/js/pages/dashboard/dashboard-admin.page.js"></script>
+    <script src="/js/pages/dashboard/dashboard-event.page.js"></script>
+    <script src="/js/pages/dashboard/dashboard-operator.page.js"></script>
+    <script src="/js/pages/dashboard/dashboard-profile.page.js"></script>
+    <script src="/js/pages/dashboard/dashboard-reception.page.js"></script>
+    <script src="/js/pages/dashboard/log.page.js"></script>
+    <script src="/js/pages/dashboard/order.page.js"></script>
+    <script src="/js/pages/dashboard/profile.page.js"></script>
+    <script src="/js/pages/dashboard/settings.page.js"></script>
+    <script src="/js/pages/dashboard/shop.page.js"></script>
+    <script src="/js/pages/dashboard/task.page.js"></script>
+    <script src="/js/pages/dashboard/user.page.js"></script>
     <script src="/js/pages/dashboard/view-edit-user.js"></script>
+    <script src="/js/pages/dashboard/view-profile.page.js"></script>
+    <script src="/js/pages/dashboard/view-reception.page.js"></script>
     <script src="/js/pages/dashboard/view-record-user.js"></script>
     <script src="/js/pages/dashboard/view-summary-users.js"></script>
-    <script src="/js/pages/dashboard/view-user.js"></script>
     <script src="/js/pages/dashboard/welcome.page.js"></script>
     <script src="/js/pages/entrance/confirmed-email.page.js"></script>
     <script src="/js/pages/entrance/forgot-password.page.js"></script>
@@ -175,12 +183,14 @@
     <script src="/js/pages/homepage.page.js"></script>
     <script src="/js/pages/legal/privacy.page.js"></script>
     <script src="/js/pages/legal/terms.page.js"></script>
-    <script src="/js/pages/user/user-view.page.js"></script>
     <script src="/js/pages/validate.page.js"></script>
-    <script src="/js/pages/validate/email.page.js"></script>
-    <script src="/js/pages/validate/identity.page.js"></script>
-    <script src="/js/pages/validate/medical.page.js"></script>
+    <script src="/js/pages/validate/profile.page.js"></script>
     <script src="/js/pages/validate/upload.page.js"></script>
+    <script src="/js/pages/validate/validate-email.page.js"></script>
+    <script src="/js/pages/validate/validate-identity.page.js"></script>
+    <script src="/js/pages/validate/validate-medical.page.js"></script>
+    <script src="/js/pages/validate/validate-profile.page.js"></script>
+    <script src="/js/pages/validate/validate-upload.page.js"></script>
     <!--SCRIPTS END-->
 
     <% /* Display an overlay if the current browser is not supported.

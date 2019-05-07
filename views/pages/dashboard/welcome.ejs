@@ -8,9 +8,14 @@
         <div class="col-sm-6">
           <h4>User identity</h4>
           <div class="buttons">
-              <a class="btn btn-info" href="/user">View My Profile</a>
+              <a class="btn btn-info" href="/account">View My Account</a>
               <a class="btn btn-info" href="/products">View Our Products</a>
-              <a class="btn btn-info" href="/account/profile">Update My Profile</a>
+              <a class="btn btn-info" href="/account/profile">Edit My Account</a>
+              <br>
+              <br>
+              <a class="btn btn-info" href="/dashboard/profile">My Account Dashboard</a>
+              <a class="btn btn-info" href="/validate/upload">Validation Upload</a>
+              <a class="btn btn-info" href="/validate/profile">Validation Profile</a>
             </div>
         </div>
         <div class="col-sm-6">
@@ -27,16 +32,15 @@
       </div>
       <div class="col-sm-6">
         <span class="float-sm-right">
-          <a class="btn btn-sm btn-outline-info account-settings-button" href="/account/profile">Edit profile</a>
-          <a class="btn btn-sm btn-outline-secondary account-profile-button" href="/user">View profile</a>
+          <a class="btn btn-sm btn-outline-secondary account-settings-button" href="/account/edit">Edit profile</a>
+          <a class="btn btn-sm btn-outline-info account-profile-button" href="/account/profile">View profile</a>
         </span>
       </div>
     </div>
     <div class="row">
       <div class="col-3">Name:</div>
       <div class="col"><strong>{{me.nameFirst}} {{me.nameLast}}</strong></div>
-    </div>
-    <div class="row">
+
       <div class="col-3">Email:</div>
       <div class="col">
         <strong :class="[me.emailStatus === 'unconfirmed' || me.emailStatus === 'change-requested' ? 'text-muted' : '']">{{me.emailChangeCandidate ? me.emailChangeCandidate : me.emailAddress}}</strong>
@@ -46,24 +50,21 @@
     <div class="row">
       <div class="col-3">Phone:</div>
       <div class="col"><strong>{{me.phoneMobile}}</strong></div>
-    </div>
-    <div class="row">
+
       <div class="col-3">Birthday:</div>
         <div class="col"><strong>{{me.birthday}}</strong></div>
     </div>
     <div class="row">
       <div class="col-3">Verified:</div>
         <div class="col"><strong>{{me.verification}}</strong></div>
-    </div>
-    <div class="row">
+
       <div class="col-3">Administrator:</div>
         <div class="col"><strong>{{me.isSuperAdmin}}</strong></div>
     </div>
     <div class="row">
       <div class="col-3">Operator:</div>
         <div class="col"><strong>{{me.isOperator}}</strong></div>
-    </div>
-    <div class="row">
+
       <div class="col-3">First Seen:</div>
         <div class="col"><strong>{{me.isOperator}}</strong></div>
     </div>
@@ -78,7 +79,7 @@
       </div>
       <div class="col-sm-6">
         <span class="float-sm-right">
-          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/users">Manage users</a>
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/user">Manage users</a>
         </span>
       </div>
     </div>
@@ -90,7 +91,7 @@
       </div>
       <div class="col-sm-6">
         <span class="float-sm-right">
-          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/events">Event logs</a>
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/log">Event logs</a>
         </span>
       </div>
     </div>
@@ -102,7 +103,7 @@
       </div>
       <div class="col-sm-6">
         <span class="float-sm-right">
-          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/orders">View orders</a>
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/order">View orders</a>
         </span>
       </div>
     </div>
@@ -113,7 +114,7 @@
       </div>
       <div class="col-sm-6">
         <span class="float-sm-right">
-          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/tasks">View tasks</a>
+          <a class="btn btn-sm btn-outline-info account-settings-button" href="/dashboard/task">View tasks</a>
         </span>
       </div>
     </div>

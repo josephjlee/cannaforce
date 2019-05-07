@@ -1,36 +1,42 @@
 <div id="upload" v-cloak>
   <div class="container">
-    <h1>Change password</h1>
+    <h1>Validate Upload</h1>
     <hr/>
-    <ajax-form action="uploadItem" :syncing.sync="syncing" :cloud-error.sync="cloudError" @submitted="submittedForm()" :handle-parsing="handleParsingForm">
-      <div class="row">
+    <div class="row mb-3">
         <div class="col-sm-6">
-          <div class="form-group">
-            <label for="password">New password</label>
-            <input class="form-control" id="password" name="password" type="password"  :class="[formErrors.password ? 'is-invalid' : '']" v-model.trim="formData.password" placeholder="••••••••" autocomplete="new-password" focus-first>
-            <div class="invalid-feedback" v-if="formErrors.password">Please enter a password or choose "Cancel".</div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group">
-            <label for="confirm-password">Confirm password</label>
-            <input class="form-control" id="confirm-password" name="confirm-password" type="password"  :class="[formErrors.confirmPassword ? 'is-invalid' : '']" v-model.trim="formData.confirmPassword" autocomplete="new-password" placeholder="••••••••">
-            <div class="invalid-feedback" v-if="formErrors.confirmPassword">Your new password and confirmation do not match.</div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <p class="text-danger" v-if="cloudError">An error occured while processing your request. Please check your information and try again, or <a href="/contact">contact support</a> if the error persists.</p>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group text-right">
-            <a class="btn btn-outline-info" href="/account">Cancel</a>
-            <ajax-button type="submit" :syncing="syncing" class="btn btn-dark">Save changes</ajax-button>
-          </div>
-        </div>
-      </div>
-    </ajax-form>
+            <h4>Select File</h4>
+            <div class="buttons">
+                <input class="btn" type="file" name="docName" placeholder="c:\temp\all-your-base.yml">
+              </div>
+          </div>      
+          <div class="col-sm-6">
+              <h4>Select Type</h4>
+              <div class="buttons">
+                  <div>
+                    <input type="radio" id="identification" name="docType" value="identification"
+                           checked>
+                    <label for="Identification">Identification</label>
+                  </div>
+                  
+                  <div>
+                    <input type="radio" id="medical" name="docType" value="medical">
+                    <label for="Medical">Medical</label>
+                  </div>
+                  
+                  <div>
+                    <input type="radio" id="vendor" name="docType" value="vendor">
+                    <label for="louie">Vendor</label>
+                  </div>
+                    <span class="float-sm-right">
+                        <input class="btn btn-sm btn-outline-info account-settings-button" type="submit" name="docReset" title="Reset" value="Reset">
+                        <input class="btn btn-sm btn-outline-info account-settings-button" type="submit" name="docType" title="Upload" value="Upload">
+                    </span>
+                </div>
+            </div>
+    </div>
+    
+
+    <hr/>
   </div>
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

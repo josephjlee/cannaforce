@@ -72,7 +72,7 @@ module.exports.routes = {
   'GET /admin/timecard/delete':              { action: 'dashboard/view-edit-user' },
   
   // Handle Operator
-  'GET /operator':              { action: 'dashboard/view-edit-user' },
+  'GET /operator':              { action: 'dashboard/view-operator' },
   'GET /operator/dashboard':              { action: 'dashboard/view-edit-user' },
   'GET /operator/appointment/create':              { action: 'dashboard/view-edit-user' },
   'GET /operator/appointment/read':              { action: 'dashboard/view-edit-user' },
@@ -95,15 +95,24 @@ module.exports.routes = {
   'GET /account':            { action: 'account/view-account-overview' },
   'GET /account/password':   { action: 'account/view-edit-password' },
   'GET /account/profile':    { action: 'account/view-edit-profile' },
+  
+  // Handle Dashboard
+  'GET /dashboard/profile': { action: 'dashboard/view-profile' },
+  'GET /dashboard/user': { action: 'dashboard/view-user' },
+  'GET /dashboard/log': { action: 'dashboard/view-log' },
+  'GET /dashboard/order': { action: 'dashboard/view-order' },
+  'GET /dashboard/shop': { action: 'dashboard/view-shop' },
+  'GET /dashboard/task': { action: 'dashboard/view-task' },
 
   // Handle Validate
   'GET /validate': { action: 'view-validate' },
-  'GET /validate/email':        { action: 'validate/view-email' },
-  'GET /validate/identity':          { action: 'validate/view-identity' },
-  'GET /validate/medical':          { action: 'validate/view-medical' },
-  'GET /validate/upload': { action: 'validate/view-upload' },
+  'GET /validate/email':        { action: 'validate/validate-email' },
+  'GET /validate/identity':          { action: 'validate/validate-identity' },
+  'GET /validate/medical':          { action: 'validate/validate-medical' },
+  'GET /validate/upload': { action: 'validate/validate-upload' },
+  'GET /validate/profile': { action: 'validate/validate-profile' },
+  'GET /validate/settings': { action: 'validate/validate-settings' },
   
-
   // Handle Logs
   'GET /log/':               { action: 'dashboard/view-edit-user' },
   'GET /log/changes':        { action: 'dashboard/view-edit-user' },
@@ -112,10 +121,11 @@ module.exports.routes = {
   'GET /log/tasks':           { action: 'dashboard/view-edit-user' },
 
   // Handle Users
-  'GET /user':   { view: 'pages/user/user-view' },
   'GET /dashboard/user/:unused?':   { action: 'dashboard/view-record-user' },
   'GET /dashboard/users':   { action: 'dashboard/view-summary-users' },
 
+  // Handle Reception
+  'GET /reception': { action: 'dashboard/view-reception' },
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
   //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗
